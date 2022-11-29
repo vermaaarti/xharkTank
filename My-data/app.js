@@ -16,16 +16,24 @@ const pitchRouter = express.Router();
 app.use('/pitches', pitchRouter);
 
 pitchRouter
+.route('/')
+.get(getUser)
+.post(postUser);
+
+pitchRouter
 .route('/:id')
 .get(getPitchById);
 
 
-app.get("/pitches", async(req, res) => {
-  //res.send("list of pitches are ")
+// app.get("/pitches", async(req, res) => {
+//   //res.send("list of pitches are ")
+//   res.send(pitches);
+//  })
+ function getUser(req, res){
   res.send(pitches);
- })
+ }
 
-app.post("/pitches", async(req, res) =>{
+ function postUser(req, res){
   console.log(req.body);
   pitches = req.body;
    res.json({
@@ -36,7 +44,20 @@ app.post("/pitches", async(req, res) =>{
         res.status(400).send("pitch could not be created");
       }
       res.status(201).send(pitches);
- })
+ }
+
+// app.post("/pitches", async(req, res) =>{
+//   console.log(req.body);
+//   pitches = req.body;
+//    res.json({
+//     message : "pitch created successfully",
+//     pitch : req.body
+//    })
+//    if(!pitches){
+//         res.status(400).send("pitch could not be created");
+//       }
+//       res.status(201).send(pitches);
+//  })
 // Router.post("/pitches", async(req, res) =>{
 //   let pitch = new pitch({
 //     enterpreneur : req.body.enterpreneur,
@@ -78,21 +99,22 @@ app.post("/pitches/:id/makeOffer", async(req, res) =>{
 
  function getPitchById(req, res){
   console.log(req.params.id);
- let paramId= req.params.id;
- let obj = {};
- for(let i=0; i<pitches.length; i++){
-  if(pitches[i]['id']==paramId){
-    obj = entrepreneur[i];
-  }
- }
+ //let paramId= req.params.id;
+ let obj = {
+ // enterpreneurmodels.findOne({_id : req.params.id})
+ };
+//  for(let i=0; i<pitches.length; i++){
+//   if(pitches[i]['id']==paramId){
+//     obj = entrepreneur[i];
+//   }
+//  }
+  
    res.json({
     message : "enterpreneur id received",
     id : req.params.id,
     data : obj
    })
  }
-
-
 
 
 app.listen(port, () =>{
@@ -111,31 +133,4 @@ app.listen(port, () =>{
 
 
 
-
-//  app.patch("/pitches", async(req, res) => {
-//   //res.send("list of pitches are ")
-//  console.log("req.body->", req.body);
-// res.json({
-//   message:"data updated successfully",
-//   pitch : req.body
-// })
-// console.log(req.body);
-//  })
-
-//  app.put("/pitches", async(req, res) => {
-//   //res.send("list of pitches are ")
-//  console.log("req.body->", req.body);
-// res.json({
-//   message:"data updated successfully",
-//   pitch : req.body
-// })
-// console.log(req.body);
-//  })
-
-// app.delete("/pitches", async(req,res) =>{
-//   pitches = {};
-//   res.json({
-//     message: "data deleted successfully"
-//   })
-// })
 
