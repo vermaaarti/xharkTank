@@ -3,6 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,java,node,macos,linux,windows,intellij,eclipse,visualstudiocode,pycharm
 
 ### Eclipse ###
+node_modules
 .metadata
 bin/
 tmp/
